@@ -1,40 +1,33 @@
 package es.cic.curso11.snippets.archivos;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-import java.io.File;
+public class EngordarArchivoSnippet {
 
-public class ArchivoOperacionNIOTest {
-
-	// Origenes de Datos
-	//String archivoPruebaEnBlanco = "D:" + File.separator + "USUARIOS" + File.separator + "aitor" + File.separator + "testing" + File.separator + "archivos" + File.separator + "archivoVacio.txt";
-	String archivoPruebaEnBlanco = "C:\\testing\\archivos\\archivoVacio.txt";
-	String archivoPruebaCeros = "C:\\testing\\archivos\\archivoCeros.txt";
-	
-	// Ubicación de los archivos finales
-	String destinoPruebaEnBlanco = "D:\\USUARIOS\\aitor\\testing\\resultados\\archivoVacioCopia.txt";
-	String destinoPruebaCeros = "D:\\USUARIOS\\aitor\\testing\\resultados\\archivoCerosCopia.txt";
-	
-	// Definicion de la Clase de Pruebas
-	ArchivoOperacionNIO cut;
-	
-	@Before
-	public void setUp() throws Exception {
-		cut = new ArchivoOperacionNIO();
-	}
-
-	@Test
-	public void copiarArchivoVacioTest() throws IOException {
-		cut.copiarArchivoNIO(archivoPruebaEnBlanco, destinoPruebaEnBlanco);
-	}
-
-	@Test
-	public void copiarArchivoCerosTest() throws IOException {
-		cut.copiarArchivoNIO(archivoPruebaCeros, destinoPruebaCeros);
+	/**
+	 * Writes data in a File until it reaches aprox. 400 Mb
+	 * @param pathArchivo
+	 * @throws IOException 
+	 */
+	@SuppressWarnings("unused")
+	private void engordarArchivo(Path pathArchivo) throws IOException {
+		
+		String cadenaLarga = "";
+		for (int i=0; i < 200; i++) {
+			cadenaLarga += "0";
+		}
+		
+		List<String> tochacoPreparado = new ArrayList<String>();
+		for (int i=0; i < 2000000; i++) {
+			tochacoPreparado.add(cadenaLarga);
+		}
+		
+		Files.write(pathArchivo, tochacoPreparado);
+		
 	}
 	
 }
